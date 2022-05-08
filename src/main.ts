@@ -1,4 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import 'echarts'
 
-createApp(App).mount('#app')
+import '@/core/config/index'
+
+const app = createApp(App)
+app.mount('#app')
