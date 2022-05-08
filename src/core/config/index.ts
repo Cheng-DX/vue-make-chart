@@ -1,10 +1,6 @@
 import { setConfig } from './chartConfig'
 
 setConfig({
-  xAxis: {
-    type: 'category',
-    boundaryGap: false,
-  },
   yAxis: {
     type: 'value',
   },
