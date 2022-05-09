@@ -1,9 +1,14 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as echarts from 'echarts'
+import $ from 'jquery'
+import ecStat from 'echarts-stat'
 
-export function fetchExampleCode(name: string, message: any) {
+const ROOT_PATH = 'https://cdn.jsdelivr.net/gh/apache/echarts-website@asf-site/examples'
+
+export function fetchExampleCode(name: string, message: any, instance: any) {
   const fullPath = `https://cdn.jsdelivr.net/gh/apache/echarts-website@asf-site/examples/examples/js/${name}.js`
 
+  const { chart: myChart, root: chartDom } = instance
   return new Promise((resolve, reject) => {
     fetch(fullPath)
       .then(async res => {
@@ -14,24 +19,24 @@ export function fetchExampleCode(name: string, message: any) {
           try {
           // eslint-disable-next-line no-eval
             eval(text)
+            myChart.clear()
+            message.success('Load succeed.')
             resolve(option)
           }
           catch (e: any) {
-            let errorMessage = '暂不支持该图表'
-            if (e.message.includes('$ is not defined'))
-              errorMessage = '该图表含有未知数据'
-
+            const errorMessage = 'Unsupported chart, try to use another chart.'
             message.error(errorMessage)
             reject(errorMessage)
           }
         }
         else {
-          message.error(`No such code: ${name}`)
-          reject(new Error(`No such code: ${name}`))
+          const errorMessage = `Invalid code or link: '${name}'.`
+          message.error(errorMessage)
+          reject(new Error(errorMessage))
         }
       })
       .catch(e => {
-        message.error('Network error')
+        message.error('Unkown error, try again or contact us.')
         reject(e)
       })
   })

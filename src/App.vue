@@ -4,7 +4,7 @@ import Main from '@/views/Main.vue'
 </script>
 
 <template>
-  <n-message-provider>
+  <n-message-provider placement="bottom-left">
     <Main />
   </n-message-provider>
 </template>
