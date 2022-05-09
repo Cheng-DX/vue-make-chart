@@ -19,7 +19,6 @@ export function fetchExampleCode(name: string, message: any, instance: any) {
           try {
           // eslint-disable-next-line no-eval
             eval(text)
-            myChart.clear()
             message.success('Load succeed.')
             resolve(option)
           }
