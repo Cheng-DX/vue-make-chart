@@ -1,13 +1,13 @@
 {
   "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "src/charts/line/.ts"],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "src/charts/line/.ts","src/views/*.vue"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-
+  "types": ["@types/*.d.ts"],
   "references": [
     {
       "path": "./tsconfig.vite-config.json"
