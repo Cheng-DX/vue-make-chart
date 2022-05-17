@@ -1,4 +1,7 @@
 import { setConfig } from './chartConfig'
+import { useDarkMode } from '@/core/state/darkMode'
+
+const { darkMode } = useDarkMode()
 
 setConfig({
   yAxis: {
@@ -20,4 +23,5 @@ setConfig({
   legend: {
     show: true,
   },
+  darkMode,
 })

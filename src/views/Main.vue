@@ -4,11 +4,14 @@ import { ref } from 'vue'
 import { useMessage } from 'naive-ui'
 import { fetchExampleCode } from '../core/example/fetchCode'
 import HelpIcon from '../icon/HelpIcon.vue'
+import ToolBar from '@/components/ToolBar.vue'
+import { useDarkMode } from '@/core/state/darkMode'
 
+const { color } = useDarkMode()
 const message = useMessage()
 
 const exampleName = ref('')
-const option = ref({})
+const option = ref<any>({})
 
 const updateOptions = {
   silent: false,
@@ -19,6 +22,7 @@ const loading = ref(false)
 const chartRef = ref(null)
 const { setTimeout, clearTimeout } = window
 let timer: undefined | number
+
 function onInputName() {
   let name = exampleName.value
   if (name.startsWith('http')) {
@@ -32,7 +36,6 @@ function onInputName() {
   timer = setTimeout(() => {
     loading.value = true
     fetchExampleCode(name, message, chartRef.value).then(opt => {
-      // chartRef.value.chart.clear()
       option.value = opt
       loading.value = false
       clearTimeout(timer)
@@ -43,7 +46,7 @@ function onInputName() {
   }, 1000)
 }
 function beforeInput(e: Event) {
-  if (e instanceof InputEvent && e.data.length > 1)
+  if (e instanceof InputEvent && e.data!.length > 1)
     exampleName.value = ''
 }
 </script>
@@ -58,14 +61,15 @@ function beforeInput(e: Event) {
       <input
         v-model="exampleName"
         placeholder="Type code or link..."
-        class="name"
-        @input="onInputName"
+        :style="{ color }"
+        class="name" @input="onInputName"
         @beforeinput="beforeInput"
       >
     </div>
-    <div class="chart-panel">
-      <div class="title">
-        Preview
+    <div class="chart-panel" wp-100>
+      <div justify-between class="title">
+        <span>Preview</span>
+        <tool-bar />
       </div>
       <div class="chart">
         <vue-echarts
@@ -74,6 +78,11 @@ function beforeInput(e: Event) {
           autoresize
           :update-options="updateOptions"
           :loading="loading"
+          :loading-options="{
+            text: 'Loading...',
+            color: '#fff',
+            mask: '#000',
+          }"
         />
       </div>
     </div>
@@ -81,18 +90,21 @@ function beforeInput(e: Event) {
 </template>
 
 <style scoped>
-.root{
+.root {
   min-height: 100vh;
   background-color: #fff;
   display: flex;
 }
-.config-panel{
+
+.config-panel {
   width: 100%;
 }
-.chart-panel{
+
+.chart-panel {
   width: 100%;
 }
-.title{
+
+.title {
   display: flex;
   align-items: center;
   font-size: 1.2rem;
@@ -101,20 +113,22 @@ function beforeInput(e: Event) {
   font-weight: bold;
   font-family: 'Roboto', sans-serif;
 }
-.chart{
+
+.chart {
   height: calc(100vh - 140px);
   width: calc(100% - 70px);
   padding: 20px;
-  margin: 10px 10px ;
+  margin: 10px 10px;
   border: 1px solid #6b72801c;
 }
-.name{
+
+.name {
   height: 50px;
   width: calc(100% - 40px);
   margin: 10px;
   padding-inline: 5px;
 
-  border: 1px solid #6b72801c;
+  border: 1px solid #90949a1c;
   border-radius: 3px;
   outline: none;
 
@@ -123,18 +137,19 @@ function beforeInput(e: Event) {
   font-family: 'consolas';
 
   background-color: transparent;
-  color: #000;
 
 }
 
 @media screen and (max-width: 768px) {
-  .root{
+  .root {
     flex-direction: column;
   }
-  .title{
+
+  .title {
     margin-top: 0;
   }
-  .chart{
+
+  .chart {
     height: calc(100vh - 220px);
   }
 }
