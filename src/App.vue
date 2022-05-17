@@ -1,20 +1,24 @@
 <script setup lang="ts">
-import { NDialogProvider, NMessageProvider } from 'naive-ui'
+import { NConfigProvider, NDialogProvider, NMessageProvider, darkTheme } from 'naive-ui'
 import { useDarkMode } from './core/state/darkMode'
 import Main from '@/views/Main.vue'
 
-const { color, backgroundColor } = useDarkMode()
+const { darkMode, color, backgroundColor } = useDarkMode()
 </script>
 
 <template>
-  <n-message-provider placement="bottom-left">
-    <n-dialog-provider>
-      <Main
-        :style="{
-          backgroundColor,
-          color,
-        }"
-      />
-    </n-dialog-provider>
-  </n-message-provider>
+  <n-config-provider
+    :theme="darkMode ? darkTheme : null"
+  >
+    <n-message-provider placement="bottom-left">
+      <n-dialog-provider>
+        <Main
+          :style="{
+            backgroundColor,
+            color,
+          }"
+        />
+      </n-dialog-provider>
+    </n-message-provider>
+  </n-config-provider>
 </template>

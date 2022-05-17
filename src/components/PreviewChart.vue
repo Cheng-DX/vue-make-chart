@@ -1,0 +1,79 @@
+<script setup lang="ts">
+import { ref, watch } from 'vue'
+import { useMessage } from 'naive-ui'
+import VueEcharts from 'vue-echarts'
+import { fetchExampleCode } from '@/core/example/fetchCode'
+import { useDarkMode } from '@/core/state/darkMode'
+
+const props = defineProps<{
+  name: string
+}>()
+
+const message = useMessage()
+
+const loading = ref(false)
+const chartRef = ref(null)
+const option = ref<any>({})
+const updateOptions = {
+  silent: false,
+  notMerge: true,
+}
+
+const { color, backgroundColor } = useDarkMode()
+
+let timer: undefined | number
+
+watch(() => props.name, newVal => onInputName(newVal))
+
+function onInputName(name: string) {
+  if (name.startsWith('http')) {
+    const targetPlace = '?c='
+    name = name.substring(name.indexOf(targetPlace) + targetPlace.length, name.length)
+  }
+  if (name === '')
+    return
+  clearTimeout(timer)
+  loading.value = false
+  timer = setTimeout(() => {
+    loading.value = true
+    fetchExampleCode(name, message, chartRef.value).then(opt => {
+      option.value = opt
+      loading.value = false
+      clearTimeout(timer)
+    }).catch(() => {
+      loading.value = false
+      clearTimeout(timer)
+    })
+  }, 1000)
+}
+</script>
+
+<template>
+  <div class="chart">
+    <vue-echarts
+      ref="chartRef"
+      :option="option"
+      autoresize
+      :update-options="updateOptions"
+      :loading="loading"
+      :loading-options="{
+        text: 'Fetching...',
+        color,
+        textColor: color,
+        maskColor: backgroundColor,
+        fontSize: '1rem',
+        lineWidth: 2,
+      }"
+    />
+  </div>
+</template>
+
+<style scoped>
+.chart {
+  height: calc(100vh - 140px);
+  width: calc(100% - 70px);
+  padding: 20px;
+  margin: 10px 10px;
+  border: 1px solid #6b72801c;
+}
+</style>

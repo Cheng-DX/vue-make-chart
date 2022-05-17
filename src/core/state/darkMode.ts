@@ -15,7 +15,7 @@ function toggleDarkMode() {
 }
 
 const color = computed(() => darkMode.value ? '#E5E7EB' : '#000')
-const backgroundColor = computed(() => darkMode ? '#222' : '#fff')
+const backgroundColor = computed(() => darkMode.value ? '#222' : '#fff')
 
 export function useDarkMode() {
   return {
