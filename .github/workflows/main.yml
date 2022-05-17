@@ -34,7 +34,7 @@ jobs:
         run: 
           set -e
           
-          npm run build
+          npx vite build
           cd docs
 
           git init
