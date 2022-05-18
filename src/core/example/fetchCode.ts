@@ -3,10 +3,10 @@ import * as echarts from 'echarts'
 import $ from 'jquery'
 import ecStat from 'echarts-stat'
 
-const ROOT_PATH = 'https://fastly.jsdelivr.net/gh/apache/echarts-website@asf-site/examples/examples/js'
+const ROOT_PATH = 'https://fastly.jsdelivr.net/gh/apache/echarts-website@asf-site/examples'
 
 export function fetchExampleCode(name: string, message: any, instance: any) {
-  const fullPath = `${ROOT_PATH}/${name}.js`
+  const fullPath = `${ROOT_PATH}/examples/js/${name}.js`
 
   const { chart: myChart, root: chartDom } = instance
   return new Promise<any>((resolve, reject) => {
