@@ -3,14 +3,16 @@ import * as echarts from 'echarts'
 import $ from 'jquery'
 import ecStat from 'echarts-stat'
 
-const ROOT_PATH = 'https://cdn.jsdelivr.net/gh/apache/echarts-website@asf-site/examples'
+const ROOT_PATH = 'https://fastly.jsdelivr.net/gh/apache/echarts-website@asf-site/examples/examples/js'
 
 export function fetchExampleCode(name: string, message: any, instance: any) {
-  const fullPath = `https://cdn.jsdelivr.net/gh/apache/echarts-website@asf-site/examples/examples/js/${name}.js`
+  const fullPath = `${ROOT_PATH}/${name}.js`
 
   const { chart: myChart, root: chartDom } = instance
   return new Promise((resolve, reject) => {
-    fetch(fullPath)
+    fetch(fullPath, {
+      method: 'GET',
+    })
       .then(async res => {
         if (res.ok) {
           const text = await res.text()
