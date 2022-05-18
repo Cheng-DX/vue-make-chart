@@ -9,7 +9,7 @@ export function fetchExampleCode(name: string, message: any, instance: any) {
   const fullPath = `${ROOT_PATH}/${name}.js`
 
   const { chart: myChart, root: chartDom } = instance
-  return new Promise((resolve, reject) => {
+  return new Promise<any>((resolve, reject) => {
     fetch(fullPath, {
       method: 'GET',
     })

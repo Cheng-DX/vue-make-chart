@@ -2,8 +2,10 @@
 import { ref, watch } from 'vue'
 import { useMessage } from 'naive-ui'
 import VueEcharts from 'vue-echarts'
+import defu from 'defu'
 import { fetchExampleCode } from '@/core/example/fetchCode'
 import { useDarkMode } from '@/core/state/darkMode'
+import { config } from '@/core/config/chartConfig'
 
 const props = defineProps<{
   name: string
@@ -19,7 +21,7 @@ const updateOptions = {
   notMerge: true,
 }
 
-const { color, backgroundColor } = useDarkMode()
+const { darkMode, color, backgroundColor } = useDarkMode()
 
 let timer: undefined | number
 
@@ -37,6 +39,7 @@ function onInputName(name: string) {
   timer = setTimeout(() => {
     loading.value = true
     fetchExampleCode(name, message, chartRef.value).then(opt => {
+      opt = defu(opt, config.value)
       option.value = opt
       loading.value = false
       clearTimeout(timer)
@@ -64,6 +67,8 @@ function onInputName(name: string) {
         fontSize: '1rem',
         lineWidth: 2,
       }"
+      :theme="darkMode ? 'dark' : 'light'"
+      style="background-color: transparent;"
     />
   </div>
 </template>

@@ -1,12 +1,6 @@
 import { setConfig } from './chartConfig'
-import { useDarkMode } from '@/core/state/darkMode'
-
-const { darkMode } = useDarkMode()
 
 setConfig({
-  yAxis: {
-    type: 'value',
-  },
   toolbox: {
     show: true,
     feature: {
@@ -20,8 +14,5 @@ setConfig({
       },
     },
   },
-  legend: {
-    show: true,
-  },
-  darkMode,
+  backgroundColor: 'transparent',
 })
