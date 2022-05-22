@@ -24,7 +24,7 @@ function beforeInput(e: Event) {
 
 <template>
   <div class="flex min-h-100vh root">
-    <div flex flex-col flex-1 max-h-100vh wp-97>
+    <div flex flex-col max-h-100vh wp-50 class="panel">
       <div class="title">
         <span>Code or link</span>
       </div>
@@ -43,12 +43,12 @@ function beforeInput(e: Event) {
         <config-chart :root="option" />
       </div>
     </div>
-    <div flex flex-col flex-1 max-h-100vh>
+    <div flex flex-col max-h-100vh wp-50 class="panel">
       <div justify-between class="title">
         <span>Preview</span>
         <tool-bar />
       </div>
-      <preview-chart :name="exampleName" class="flex-1 p-0.3rem m-1rem" />
+      <preview-chart :name="exampleName" class="p-0.3rem m-1rem" />
     </div>
   </div>
 </template>
@@ -70,6 +70,9 @@ function beforeInput(e: Event) {
   }
   .title {
     margin-top: 0;
+  }
+  .panel{
+    width: 100%;
   }
 }
 </style>

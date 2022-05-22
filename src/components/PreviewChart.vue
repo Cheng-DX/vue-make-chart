@@ -52,7 +52,10 @@ function onInputName(name: string) {
 </script>
 
 <template>
-  <div>
+  <div
+    class="border-1px border-solid border-#6b72801c"
+    style="height: calc(100vh - 1rem)"
+  >
     <vue-echarts
       ref="chartRef"
       :option="option"
@@ -68,7 +71,7 @@ function onInputName(name: string) {
         lineWidth: 2,
       }"
       :theme="darkMode ? 'dark' : 'light'"
-      class="min-h-30rem border-1px border-solid border-#6b72801c"
+      style="height: 100%"
     />
   </div>
 </template>
