@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useDialog, useMessage } from 'naive-ui'
 import PreviewChart from '../components/PreviewChart.vue'
 import ToolBar from '@/components/ToolBar.vue'
 import { useDarkMode } from '@/core/state/darkMode'
+import { util } from '@/core/shared'
+
+util.message = useMessage()
+util.dialog = useDialog()
 
 const { color } = useDarkMode()
 const exampleName = ref('')

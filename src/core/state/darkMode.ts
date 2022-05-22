@@ -1,9 +1,13 @@
 import { computed, ref } from 'vue'
 
+const LOCAL_STORAGE_DARKMODE_KEY = 'darkMode'
+
 function init() {
-  if (localStorage.getItem('darkMode')) { return ref(localStorage.getItem('darkMode') === 'true') }
+  if (localStorage.getItem(LOCAL_STORAGE_DARKMODE_KEY)) {
+    return ref(localStorage.getItem(LOCAL_STORAGE_DARKMODE_KEY) === 'true')
+  }
   else {
-    localStorage.setItem('darkMode', 'false')
+    localStorage.setItem(LOCAL_STORAGE_DARKMODE_KEY, 'false')
     return ref(false)
   }
 }
@@ -11,7 +15,7 @@ const darkMode = init()
 
 function toggleDarkMode() {
   darkMode.value = !darkMode.value
-  localStorage.setItem('darkMode', darkMode.value.toString())
+  localStorage.setItem(LOCAL_STORAGE_DARKMODE_KEY, darkMode.value.toString())
 }
 
 const color = computed(() => darkMode.value ? '#E5E7EB' : '#000')

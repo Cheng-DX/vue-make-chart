@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import { useMessage } from 'naive-ui'
 import VueEcharts from 'vue-echarts'
 import defu from 'defu'
 import { fetchExampleCode } from '@/core/example/fetchCode'
@@ -10,8 +9,6 @@ import { config } from '@/core/config/chartConfig'
 const props = defineProps<{
   name: string
 }>()
-
-const message = useMessage()
 
 const loading = ref(false)
 const chartRef = ref(null)
@@ -38,7 +35,7 @@ function onInputName(name: string) {
   loading.value = false
   timer = setTimeout(() => {
     loading.value = true
-    fetchExampleCode(name, message, chartRef.value).then(opt => {
+    fetchExampleCode(name, chartRef.value).then(opt => {
       opt = defu(opt, config.value)
       option.value = opt
       loading.value = false

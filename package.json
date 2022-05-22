@@ -1,6 +1,11 @@
 {
-  "name": "vue-make-echart",
+  "name": "vue-make-chart",
   "version": "0.1.0",
+  "author": {
+    "name": "chengdx",
+    "email": "chengdx0925@126.com",
+    "url": "https://github.com/Cheng-DX/vue-make-chart"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",

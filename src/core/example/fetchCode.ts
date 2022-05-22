@@ -2,10 +2,11 @@
 import * as echarts from 'echarts'
 import $ from 'jquery'
 import ecStat from 'echarts-stat'
+import { util } from '../shared'
 
 const ROOT_PATH = 'https://fastly.jsdelivr.net/gh/apache/echarts-website@asf-site/examples'
 
-export function fetchExampleCode(name: string, message: any, instance: any) {
+export function fetchExampleCode(name: string, instance: any) {
   const fullPath = `${ROOT_PATH}/examples/js/${name}.js`
 
   const { chart: myChart, root: chartDom } = instance
@@ -21,23 +22,23 @@ export function fetchExampleCode(name: string, message: any, instance: any) {
           try {
           // eslint-disable-next-line no-eval
             eval(text)
-            message.success('Load succeed.')
+            util.message?.success('Load succeed.')
             resolve(option)
           }
           catch (e: any) {
             const errorMessage = 'Unsupported chart, try to use another chart.'
-            message.error(errorMessage)
+            util.message?.error(errorMessage)
             reject(errorMessage)
           }
         }
         else {
           const errorMessage = `Invalid code or link: '${name}'.`
-          message.error(errorMessage)
+          util.message?.error(errorMessage)
           reject(new Error(errorMessage))
         }
       })
       .catch(e => {
-        message.error('Unkown error, try again or contact us.')
+        util.message?.error('Unkown error, try again or contact us.')
         reject(e)
       })
   })
