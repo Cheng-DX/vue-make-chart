@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useDialog, useMessage } from 'naive-ui'
+import { NInput, useDialog, useMessage } from 'naive-ui'
 import PreviewChart from '../components/PreviewChart.vue'
 import ConfigChart from '../components/ConfigChart.vue'
 import ToolBar from '@/components/ToolBar.vue'
@@ -23,55 +23,37 @@ function beforeInput(e: Event) {
 </script>
 
 <template>
-  <div class="root">
-    <div class="config-panel">
+  <div class="flex min-h-100vh root">
+    <div flex flex-col flex-1 max-h-100vh wp-97>
       <div class="title">
         <span>Code or link</span>
       </div>
-      <input v-model="exampleName" placeholder="Type code or link..." :style="{ color }" class="name"
-        @beforeinput="beforeInput">
+      <n-input
+        v-model:value="exampleName"
+        placeholder="Type code or link..."
+        :style="{ color }"
+        style="width: calc(100% - 2.3rem)"
+        class="p-0.3rem m-1rem text-1rem"
+        @beforeinput="beforeInput"
+      />
       <div class="title">
         <span>Config</span>
       </div>
-      <div class="config">
+      <div class="flex-1 overflow-y-auto p-0.3rem m-1rem border-1px border-solid border-#6b72801c">
         <config-chart :root="option" />
       </div>
     </div>
-    <div class="chart-panel" wp-100>
+    <div flex flex-col flex-1 max-h-100vh>
       <div justify-between class="title">
         <span>Preview</span>
         <tool-bar />
       </div>
-      <preview-chart :name="exampleName" />
+      <preview-chart :name="exampleName" class="flex-1 p-0.3rem m-1rem" />
     </div>
   </div>
 </template>
 
 <style scoped>
-.root {
-  min-height: 100vh;
-  background-color: #fff;
-  display: flex;
-}
-
-.config-panel {
-  width: 100%;
-  height: 100vh;
-}
-
-.config {
-  width: calc(100% - 40px);
-  height: calc(100% - 190px);
-  margin: 10px;
-  padding-inline: 5px;
-  overflow-y: auto;
-  border: 1px solid #90949a1c;
-}
-
-.chart-panel {
-  width: 100%;
-}
-
 .title {
   display: flex;
   align-items: center;
@@ -82,35 +64,12 @@ function beforeInput(e: Event) {
   font-family: 'Roboto', sans-serif;
 }
 
-.name {
-  height: 50px;
-  width: calc(100% - 40px);
-  margin: 10px;
-  padding-inline: 5px;
-
-  border: 1px solid #90949a1c;
-  border-radius: 3px;
-  outline: none;
-
-  text-align: center;
-  font-size: 1rem;
-  font-family: 'consolas';
-
-  background-color: transparent;
-
-}
-
 @media screen and (max-width: 768px) {
   .root {
     flex-direction: column;
   }
-
   .title {
     margin-top: 0;
-  }
-
-  .chart {
-    height: calc(100vh - 220px);
   }
 }
 </style>

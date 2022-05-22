@@ -52,8 +52,13 @@ function onInputName(name: string) {
 </script>
 
 <template>
-  <div class="chart">
-    <vue-echarts ref="chartRef" :option="option" autoresize :update-options="updateOptions" :loading="loading"
+  <div>
+    <vue-echarts
+      ref="chartRef"
+      :option="option"
+      autoresize
+      :update-options="updateOptions"
+      :loading="loading"
       :loading-options="{
         text: 'Fetching...',
         color,
@@ -61,16 +66,9 @@ function onInputName(name: string) {
         maskColor: backgroundColor,
         fontSize: '1rem',
         lineWidth: 2,
-      }" :theme="darkMode ? 'dark' : 'light'" style="background-color: transparent;" />
+      }"
+      :theme="darkMode ? 'dark' : 'light'"
+      class="min-h-30rem border-1px border-solid border-#6b72801c"
+    />
   </div>
 </template>
-
-<style scoped>
-.chart {
-  height: calc(100vh - 130px);
-  width: calc(100% - 70px);
-  padding: 20px;
-  margin: 10px 10px;
-  border: 1px solid #6b72801c;
-}
-</style>
