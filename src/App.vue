@@ -9,6 +9,7 @@ const { darkMode, color, backgroundColor } = useDarkMode()
 <template>
   <n-config-provider
     :theme="darkMode ? darkTheme : null"
+    button=""
   >
     <n-message-provider placement="bottom-left">
       <n-dialog-provider>
