@@ -1,3 +1,5 @@
+/* eslint-disable no-var */
+/* eslint-disable vars-on-top */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as echarts from 'echarts'
 import $ from 'jquery'
@@ -17,8 +19,7 @@ export function fetchExampleCode(name: string, instance: any) {
       .then(async res => {
         if (res.ok) {
           const text = await res.text()
-          // eslint-disable-next-line prefer-const
-          let option: any = null
+          var option: any = null
           try {
           // eslint-disable-next-line no-eval
             eval(text)

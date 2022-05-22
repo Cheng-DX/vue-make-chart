@@ -1,16 +1,20 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useDialog, useMessage } from 'naive-ui'
+import { NScrollbar, useDialog, useMessage } from 'naive-ui'
 import PreviewChart from '../components/PreviewChart.vue'
+import ConfigChart from '../components/ConfigChart.vue'
 import ToolBar from '@/components/ToolBar.vue'
 import { useDarkMode } from '@/core/state/darkMode'
 import { util } from '@/core/shared'
+import { useOption } from '@/core/state/option'
 
 util.message = useMessage()
 util.dialog = useDialog()
 
 const { color } = useDarkMode()
 const exampleName = ref('')
+
+const { option } = useOption()
 
 function beforeInput(e: Event) {
   if (e instanceof InputEvent && e?.data!.length > 1)
@@ -31,6 +35,11 @@ function beforeInput(e: Event) {
         class="name"
         @beforeinput="beforeInput"
       >
+      <div class="config">
+        <!-- <n-scrollbar> -->
+        <config-chart :root="option" />
+        <!-- </n-scrollbar> -->
+      </div>
     </div>
     <div class="chart-panel" wp-100>
       <div justify-between class="title">
@@ -51,8 +60,13 @@ function beforeInput(e: Event) {
 
 .config-panel {
   width: 100%;
+  height: 100vh;
 }
-
+.config{
+  width: 100%;
+  height: calc(100% - 130px );
+  overflow-y: auto;
+}
 .chart-panel {
   width: 100%;
 }

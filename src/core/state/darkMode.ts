@@ -1,4 +1,4 @@
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 const LOCAL_STORAGE_DARKMODE_KEY = 'darkMode'
 
@@ -20,6 +20,12 @@ function toggleDarkMode() {
 
 const color = computed(() => darkMode.value ? '#E5E7EB' : '#000')
 const backgroundColor = computed(() => darkMode.value ? '#222' : '#fff')
+
+watch(darkMode, () => {
+  document.documentElement.style.colorScheme = darkMode.value ? 'dark' : 'light'
+}, {
+  immediate: true,
+})
 
 export function useDarkMode() {
   return {

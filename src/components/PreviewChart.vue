@@ -5,11 +5,13 @@ import defu from 'defu'
 import { fetchExampleCode } from '@/core/example/fetchCode'
 import { useDarkMode } from '@/core/state/darkMode'
 import { config } from '@/core/config/chartConfig'
+import { useOption } from '@/core/state/option'
 
 const props = defineProps<{
   name: string
 }>()
 
+const { setOption } = useOption()
 const loading = ref(false)
 const chartRef = ref(null)
 const option = ref<any>({})
@@ -38,6 +40,7 @@ function onInputName(name: string) {
     fetchExampleCode(name, chartRef.value).then(opt => {
       opt = defu(opt, config.value)
       option.value = opt
+      setOption(opt)
       loading.value = false
       clearTimeout(timer)
     }).catch(() => {
