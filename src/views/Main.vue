@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { NScrollbar, useDialog, useMessage } from 'naive-ui'
+import { useDialog, useMessage } from 'naive-ui'
 import PreviewChart from '../components/PreviewChart.vue'
 import ConfigChart from '../components/ConfigChart.vue'
 import ToolBar from '@/components/ToolBar.vue'
@@ -28,17 +28,13 @@ function beforeInput(e: Event) {
       <div class="title">
         <span>Code or link</span>
       </div>
-      <input
-        v-model="exampleName"
-        placeholder="Type code or link..."
-        :style="{ color }"
-        class="name"
-        @beforeinput="beforeInput"
-      >
+      <input v-model="exampleName" placeholder="Type code or link..." :style="{ color }" class="name"
+        @beforeinput="beforeInput">
+      <div class="title">
+        <span>Config</span>
+      </div>
       <div class="config">
-        <!-- <n-scrollbar> -->
         <config-chart :root="option" />
-        <!-- </n-scrollbar> -->
       </div>
     </div>
     <div class="chart-panel" wp-100>
@@ -62,11 +58,16 @@ function beforeInput(e: Event) {
   width: 100%;
   height: 100vh;
 }
-.config{
-  width: 100%;
-  height: calc(100% - 130px );
+
+.config {
+  width: calc(100% - 40px);
+  height: calc(100% - 190px);
+  margin: 10px;
+  padding-inline: 5px;
   overflow-y: auto;
+  border: 1px solid #90949a1c;
 }
+
 .chart-panel {
   width: 100%;
 }
