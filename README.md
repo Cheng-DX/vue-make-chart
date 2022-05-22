@@ -19,9 +19,9 @@
 
 ## Usage
 - Drag pics in [_ECharts' website_]('https://echarts.apache.org/examples/zh/index.html') :
-<img src='./src/assets/help1.jpg' />
+<img src='https://s1.ax1x.com/2022/05/22/Ozvx5F.jpg' />
 - Input the code is Okay:
-<img src='./src/assets/help2.jpg' />
+<img src='https://s1.ax1x.com/2022/05/22/OzxCvR.jpg' />
 
 ## License
 
