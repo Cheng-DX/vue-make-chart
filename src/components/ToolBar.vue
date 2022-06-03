@@ -19,7 +19,7 @@ function help() {
 }
 
 const version = ref({
-  name: 'padding...',
+  name: 'pending...',
   href: '',
 })
 async function fetchVersion() {
