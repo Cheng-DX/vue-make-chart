@@ -37,7 +37,7 @@ function beforeInput(e: Event) {
         @beforeinput="beforeInput"
       />
       <div class="title">
-        <span>Config</span>
+        <span>Configs</span>
       </div>
       <div class="flex-1 overflow-y-auto p-0.3rem m-1rem border-1px border-solid border-#6b72801c">
         <config-chart :root="option" />
